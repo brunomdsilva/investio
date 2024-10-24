@@ -1,0 +1,12 @@
+created:
+    - database/migrations/2024_10_24_012827_create_investments_table.php
+    - database/migrations/2024_10_24_012828_create_user_investments_table.php
+    - database/migrations/2024_10_24_012829_create_transactions_table.php
+    - app/Models/Investment.php
+    - app/Models/UserInvestment.php
+    - app/Models/Transaction.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable', password: string, remember_token: 'string:100 nullable' }
+    Investment: { name: string, ticker: 'string unique', current_value: 'decimal:15,2 default:0', type: string, relationships: { hasMany: 'Transaction, UserInvestment' } }
+    UserInvestment: { user_id: 'id foreign User onDelete:cascade', investment_id: 'id foreign Investment onDelete:cascade', owned_quantity: 'integer unsigned default:0', indexes: [{ unique: 'user_id, investment_id' }], relationships: { belongsTo: 'User, Investment' } }
+    Transaction: { user_id: 'id foreign User onDelete:cascade', investment_id: 'id foreign Investment onDelete:cascade', type: 'enum:buy,sell', quantity: 'integer unsigned default:0', unit_value: 'decimal:15,2 default:0', total_value: 'decimal:15,2 default:0', relationships: { belongsTo: 'User, Investment' } }

@@ -1,0 +1,27 @@
+models:
+  Investment:
+    name: string
+    ticker: string unique
+    current_value: decimal:15,2 default:0
+    type: string
+    relationships:
+      hasMany: Transaction, UserInvestment
+
+  UserInvestment:
+    user_id: id foreign User onDelete:cascade
+    investment_id: id foreign Investment onDelete:cascade
+    owned_quantity: integer unsigned default:0
+    indexes:
+      - unique: user_id, investment_id
+    relationships:
+      belongsTo: User, Investment
+
+  Transaction:
+    user_id: id foreign User onDelete:cascade
+    investment_id: id foreign Investment onDelete:cascade
+    type: enum:buy,sell
+    quantity: integer unsigned default:0
+    unit_value: decimal:15,2 default:0
+    total_value: decimal:15,2 default:0
+    relationships:
+      belongsTo: User, Investment
