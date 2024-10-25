@@ -14,12 +14,12 @@ type Props = {
 } & InputProps &
     Pick<React.ComponentProps<"div">, "className">;
 
-const defaultProps: Partial<Props> = {
+const propsWithDefaults: Partial<Props> = {
     type: "text",
 };
 
 export default function AppInput(baseProps: Props) {
-    let props = { ...defaultProps, ...baseProps } as const;
+    let props = { ...propsWithDefaults, ...baseProps } as const;
 
     const id = useId();
 
