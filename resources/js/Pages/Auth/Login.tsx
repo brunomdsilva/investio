@@ -4,6 +4,7 @@ import AppInput from "@/Components/Forms/AppInput";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Link, useForm } from "@inertiajs/react";
 import { FormEvent, useId } from "react";
+import { route } from "ziggy-js";
 import AuthCard from "./Partials/AuthCard";
 
 type Props = {
