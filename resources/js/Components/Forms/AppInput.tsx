@@ -2,21 +2,17 @@ import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import React, { useId } from "react";
 
-type ReactInputProps = React.ComponentProps<"input">;
-
-type InputProps = {
-    type?: ReactInputProps["type"];
-    placeholder?: ReactInputProps["placeholder"];
-    value?: ReactInputProps["value"];
-    onChange?: ReactInputProps["onChange"];
-};
+type InputProps = Pick<
+    React.ComponentProps<"input">,
+    "type" | "placeholder" | "value" | "onChange" | "disabled" | "required"
+>;
 
 type Props = {
     label: string;
     hiddenLabel?: boolean;
     error?: string;
-    className?: React.ComponentProps<"div">["className"];
-} & InputProps;
+} & InputProps &
+    Pick<React.ComponentProps<"div">, "className">;
 
 const defaultProps: Partial<Props> = {
     type: "text",
@@ -28,9 +24,10 @@ export default function AppInput(baseProps: Props) {
     const id = useId();
 
     return (
-        <div className={`grid w-full gap-1.5 ${props.className}`}>
+        <div className={`grid w-full gap-2 ${props.className}`}>
             <Label htmlFor={id} className={`${props.hiddenLabel && "sr-only"}`}>
-                {props.label}
+                {props.label}{" "}
+                {props.required && <span className="text-red-500">*</span>}
             </Label>
 
             <Input
@@ -39,10 +36,12 @@ export default function AppInput(baseProps: Props) {
                 placeholder={props.placeholder}
                 value={props.value}
                 onChange={props.onChange}
+                disabled={props.disabled}
+                className={`${props.error && "border-destructive"}`}
             />
 
             {props.error && (
-                <p className="text-red-500 text-sm">{props.error}</p>
+                <p className="text-destructive text-xs">{props.error}</p>
             )}
         </div>
     );
