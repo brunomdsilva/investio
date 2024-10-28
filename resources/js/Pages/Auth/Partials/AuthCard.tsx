@@ -1,4 +1,4 @@
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/shadcn/components/ui/button";
 import {
     Card,
     CardContent,
@@ -6,7 +6,7 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/Components/ui/card";
+} from "@/shadcn/components/ui/card";
 import { Link } from "@inertiajs/react";
 import { PropsWithChildren, ReactNode } from "react";
 

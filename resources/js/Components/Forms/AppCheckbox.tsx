@@ -1,6 +1,6 @@
-import { Checkbox } from "@/Components/ui/checkbox";
+import { Checkbox } from "@/shadcn/components/ui/checkbox";
+import { Label } from "@/shadcn/components/ui/label";
 import React, { useId } from "react";
-import { Label } from "../ui/label";
 
 type ReactInputProps = Pick<
     React.ComponentProps<typeof Checkbox>,

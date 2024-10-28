@@ -1,5 +1,5 @@
-import { Input } from "@/Components/ui/input";
-import { Label } from "@/Components/ui/label";
+import { Input } from "@/shadcn/components/ui/input";
+import { Label } from "@/shadcn/components/ui/label";
 import React, { useId } from "react";
 
 type InputProps = Pick<

@@ -1,5 +1,5 @@
+import { Button } from "@/shadcn/components/ui/button";
 import { toast } from "sonner";
-import { Button } from "./ui/button";
 
 export default function AppThemeToggle() {
     function toggleTheme() {
