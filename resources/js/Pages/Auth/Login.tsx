@@ -15,8 +15,8 @@ export default function Login(props: Props) {
     const formId = useId();
 
     const form = useForm({
-        email: "",
-        password: "",
+        email: "admin@admin.com",
+        password: "admin",
         remember: false,
     });
 
