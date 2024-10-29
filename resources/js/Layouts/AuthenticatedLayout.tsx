@@ -1,5 +1,5 @@
 import AppToaster from "@/Components/AppToaster";
-import TheHeader from "@/Components/TheHeader";
+import TheHeader from "@/Components/TheHeader/TheHeader";
 import { Head } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 
@@ -15,7 +15,7 @@ export default function AuthenticatedLayout(props: Props) {
             <AppToaster />
 
             <div className="min-h-screen flex flex-col">
-                <TheHeader title={props.headTitle} />
+                <TheHeader />
 
                 <main className="flex flex-col grow">
                     <div className="grow py-8 sm:py-12">

@@ -4,9 +4,9 @@ import { SVGAttributes } from "react";
 export default function AppLogo(props: SVGAttributes<SVGElement>) {
     return (
         <svg
-            className={cn("text-primary", props.className)}
-            width="78"
-            height="30"
+            className={cn("text-primary h-8", props.className)}
+            // width="78"
+            // height="30"
             viewBox="0 0 78 30"
             xmlns="http://www.w3.org/2000/svg"
         >

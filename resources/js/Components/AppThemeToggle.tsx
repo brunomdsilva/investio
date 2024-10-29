@@ -1,21 +1,20 @@
 import { Button } from "@/shadcn/components/ui/button";
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
+import { IconMoon, IconSun } from "./AppIcons";
 
 export default function AppThemeToggle() {
-    function toggleTheme() {
-        document.documentElement.classList.toggle("dark");
-    }
+    const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") === "dark");
 
-    function triggerToast() {
-        toast.success("Hello from Sonner!", {
-            description: "This is a toast message",
-        });
-    }
+    const Icon = isDark ? IconSun : IconMoon;
+
+    useEffect(() => {
+        document.documentElement.classList.toggle("dark", isDark);
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    }, [isDark]);
 
     return (
-        <div className="fixed right-10 top-10 flex items-center gap-4">
-            <Button onClick={toggleTheme}>Toggle Theme</Button>
-            <Button onClick={triggerToast}>Toaster</Button>
-        </div>
+        <Button onClick={() => setIsDark(!isDark)} variant="outline" size="icon">
+            <Icon className="!size-5" />
+        </Button>
     );
 }
