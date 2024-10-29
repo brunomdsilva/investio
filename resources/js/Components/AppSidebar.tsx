@@ -8,7 +8,6 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarTrigger,
 } from "@/shadcn/components/ui/sidebar";
 import { Home, InboxIcon } from "lucide-react";
 import { route } from "ziggy-js";
@@ -34,10 +33,9 @@ const menu = [
 
 export default function AppSidebar() {
     return (
-        <Sidebar collapsible="icon">
-            <SidebarHeader>
-                <AppLogo className="size-7" />
-                <SidebarTrigger />
+        <Sidebar>
+            <SidebarHeader className="py-0 px-4 h-20 border-b justify-center">
+                <AppLogo className="w-16" />
             </SidebarHeader>
             <SidebarContent>
                 <SidebarGroup>
