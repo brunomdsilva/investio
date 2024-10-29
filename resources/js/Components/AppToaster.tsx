@@ -28,9 +28,9 @@ export default function AppToaster() {
     }, [backendToast]);
 
     return (
-        <div className="fixed top-0 left-0">
+        <div className="fixed top-0 left-0 z-[9999]">
             <Toaster
-                position="top-left"
+                position="top-right"
                 visibleToasts={6}
                 duration={9999}
                 expand

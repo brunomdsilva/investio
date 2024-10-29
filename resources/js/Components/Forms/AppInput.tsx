@@ -1,24 +1,41 @@
 import { Input } from "@/shadcn/components/ui/input";
 import { Label } from "@/shadcn/components/ui/label";
-import React, { useId } from "react";
+import { ComponentProps, ForwardedRef, forwardRef, useId } from "react";
 
-type InputProps = Pick<
-    React.ComponentProps<"input">,
-    "type" | "placeholder" | "value" | "onChange" | "disabled" | "required"
->;
+type AppInputTypes =
+    | "number"
+    | "password"
+    | "search"
+    | "date"
+    | "datetime-local"
+    | "email"
+    | "month"
+    | "tel"
+    | "text"
+    | "time"
+    | "url"
+    | "week";
 
 type Props = {
+    className?: string;
     label: string;
     hiddenLabel?: boolean;
+    placeholder?: string;
     error?: string;
-} & InputProps &
-    Pick<React.ComponentProps<"div">, "className">;
-
-const propsWithDefaults: Partial<Props> = {
-    type: "text",
+    type?: AppInputTypes;
+    disabled?: boolean;
+    required?: boolean;
+    autoFocus?: boolean;
+    onChange?: ComponentProps<"input">["onChange"];
+    value?: ComponentProps<"input">["value"];
 };
 
-export default function AppInput(baseProps: Props) {
+function AppInput(baseProps: Props, ref: ForwardedRef<HTMLInputElement>) {
+    const propsWithDefaults: Partial<Props> = {
+        type: "text",
+        placeholder: baseProps.type === "password" ? "••••" : undefined,
+    };
+
     let props = { ...propsWithDefaults, ...baseProps } as const;
 
     const id = useId();
@@ -26,13 +43,14 @@ export default function AppInput(baseProps: Props) {
     return (
         <div className={`grid w-full gap-2 ${props.className}`}>
             <Label htmlFor={id} className={`${props.hiddenLabel && "sr-only"}`}>
-                {props.label}{" "}
-                {props.required && <span className="text-red-500">*</span>}
+                {props.label} {props.required && <span className="text-red-500">*</span>}
             </Label>
 
             <Input
-                type={props.type}
                 id={id}
+                ref={ref}
+                type={props.type}
+                autoFocus={props.autoFocus}
                 placeholder={props.placeholder}
                 value={props.value}
                 onChange={props.onChange}
@@ -40,9 +58,9 @@ export default function AppInput(baseProps: Props) {
                 className={`${props.error && "border-destructive"}`}
             />
 
-            {props.error && (
-                <p className="text-destructive text-xs">{props.error}</p>
-            )}
+            {props.error && <p className="text-destructive text-xs">{props.error}</p>}
         </div>
     );
 }
+
+export default forwardRef(AppInput);

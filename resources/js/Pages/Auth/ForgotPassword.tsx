@@ -32,8 +32,9 @@ export default function ForgotPassword() {
                     label: "Back to login",
                 }}
             >
-                <AppFormWrapper id={formId} onSubmit={submit}>
+                <AppFormWrapper formId={formId} onSubmit={submit}>
                     <AppInput
+                        autoFocus
                         label="Email"
                         placeholder="example@email.com"
                         required

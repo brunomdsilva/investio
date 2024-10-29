@@ -10,34 +10,25 @@ import {
     SidebarMenuItem,
     SidebarTrigger,
 } from "@/shadcn/components/ui/sidebar";
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Home, InboxIcon } from "lucide-react";
+import { route } from "ziggy-js";
 import AppLogo from "./AppLogo";
 
 const menu = [
     {
         title: "Dashboard",
-        url: "#",
+        url: route("dashboard"),
         icon: Home,
     },
     {
-        title: "My Investments",
-        url: "#",
-        icon: Inbox,
-    },
-    {
-        title: "Calendar",
-        url: "#",
-        icon: Calendar,
-    },
-    {
-        title: "Search",
-        url: "#",
-        icon: Search,
+        title: "Transactions",
+        url: route("transactions.index"),
+        icon: InboxIcon,
     },
     {
         title: "Settings",
-        url: "#",
-        icon: Settings,
+        url: route("profile.edit"),
+        icon: InboxIcon,
     },
 ];
 

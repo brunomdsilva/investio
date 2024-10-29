@@ -35,10 +35,7 @@ export default function Login(props: Props) {
                 description={
                     <>
                         Don't have an account?{" "}
-                        <Link
-                            href={route("register")}
-                            className="text-primary hover:underline underline-offset-4 font-medium"
-                        >
+                        <Link href={route("register")} className="inline-link">
                             register here
                         </Link>
                     </>
@@ -52,8 +49,9 @@ export default function Login(props: Props) {
                     condition: props.canResetPassword,
                 }}
             >
-                <AppFormWrapper id={formId} onSubmit={submit}>
+                <AppFormWrapper formId={formId} onSubmit={submit}>
                     <AppInput
+                        autoFocus
                         label="Email"
                         placeholder="example@email.com"
                         required
@@ -66,20 +64,15 @@ export default function Login(props: Props) {
                         label="Password"
                         type="password"
                         required
-                        placeholder="••••"
                         value={form.data.password}
                         error={form.errors.password}
-                        onChange={(e) =>
-                            form.setData("password", e.target.value)
-                        }
+                        onChange={(e) => form.setData("password", e.target.value)}
                     />
 
                     <AppCheckbox
                         label="Remember me"
                         checked={form.data.remember}
-                        onCheckedChange={(checked: boolean) =>
-                            form.setData("remember", checked)
-                        }
+                        onCheckedChange={(checked: boolean) => form.setData("remember", checked)}
                     />
                 </AppFormWrapper>
             </AuthCard>

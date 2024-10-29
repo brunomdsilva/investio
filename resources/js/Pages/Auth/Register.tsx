@@ -36,8 +36,9 @@ export default function Register() {
                     label: "Already registered?",
                 }}
             >
-                <AppFormWrapper id={formId} onSubmit={submit}>
+                <AppFormWrapper formId={formId} onSubmit={submit}>
                     <AppInput
+                        autoFocus
                         label="Name"
                         placeholder="John Doe"
                         required
@@ -59,27 +60,18 @@ export default function Register() {
                         label="Password"
                         type="password"
                         required
-                        placeholder="••••"
                         value={form.data.password}
                         error={form.errors.password}
-                        onChange={(e) =>
-                            form.setData("password", e.target.value)
-                        }
+                        onChange={(e) => form.setData("password", e.target.value)}
                     />
 
                     <AppInput
                         label="Confirm Password"
                         type="password"
                         required
-                        placeholder="••••"
                         value={form.data.password_confirmation}
                         error={form.errors.password_confirmation}
-                        onChange={(e) =>
-                            form.setData(
-                                "password_confirmation",
-                                e.target.value
-                            )
-                        }
+                        onChange={(e) => form.setData("password_confirmation", e.target.value)}
                     />
                 </AppFormWrapper>
             </AuthCard>

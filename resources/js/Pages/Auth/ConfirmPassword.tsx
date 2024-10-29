@@ -30,17 +30,15 @@ export default function ConfirmPassword() {
                 formId={formId}
                 formProcessing={form.processing}
             >
-                <AppFormWrapper id={formId} onSubmit={submit}>
+                <AppFormWrapper formId={formId} onSubmit={submit}>
                     <AppInput
+                        autoFocus
                         label="Password"
                         type="password"
                         required
-                        placeholder="••••"
                         value={form.data.password}
                         error={form.errors.password}
-                        onChange={(e) =>
-                            form.setData("password", e.target.value)
-                        }
+                        onChange={(e) => form.setData("password", e.target.value)}
                     />
                 </AppFormWrapper>
             </AuthCard>

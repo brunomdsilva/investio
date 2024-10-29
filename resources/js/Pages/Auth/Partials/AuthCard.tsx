@@ -1,14 +1,7 @@
 import { Button } from "@/shadcn/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/shadcn/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/shadcn/components/ui/card";
 import { Link } from "@inertiajs/react";
-import { PropsWithChildren, ReactNode } from "react";
+import { ComponentProps, PropsWithChildren, ReactNode } from "react";
 
 type Props = {
     title: string;
@@ -18,9 +11,9 @@ type Props = {
     submitLabel: string;
     secondaryAction?: {
         label: string;
-        href: React.ComponentProps<typeof Link>["href"];
-        method?: React.ComponentProps<typeof Link>["method"];
-        as?: React.ComponentProps<typeof Link>["as"];
+        href: ComponentProps<typeof Link>["href"];
+        method?: ComponentProps<typeof Link>["method"];
+        as?: ComponentProps<typeof Link>["as"];
         condition?: boolean;
     };
 } & PropsWithChildren;
@@ -30,9 +23,7 @@ export default function AuthCard(props: Props) {
         <Card className="w-full max-w-md">
             <CardHeader>
                 <CardTitle>{props.title}</CardTitle>
-                {props.description && (
-                    <CardDescription>{props.description}</CardDescription>
-                )}
+                {props.description && <CardDescription>{props.description}</CardDescription>}
             </CardHeader>
 
             <CardContent>{props.children}</CardContent>

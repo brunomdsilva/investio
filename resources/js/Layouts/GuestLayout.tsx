@@ -13,8 +13,9 @@ export default function GuestLayout(props: Props) {
         <>
             <Head title={props.headTitle} />
 
+            <AppToaster />
+
             <div className="min-h-screen bg-background flex flex-col gap-8 items-center sm:justify-center py-20 px-4">
-                <AppToaster />
                 <AppThemeToggle />
 
                 <div>

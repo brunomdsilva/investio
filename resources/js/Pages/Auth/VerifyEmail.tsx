@@ -32,13 +32,8 @@ export default function VerifyEmail(props: { email: string }) {
                     as: "button",
                 }}
             >
-                <AppFormWrapper id={formId} onSubmit={submit}>
-                    <AppInput
-                        label="Email"
-                        type="email"
-                        value={props.email}
-                        disabled
-                    />
+                <AppFormWrapper formId={formId} onSubmit={submit}>
+                    <AppInput autoFocus label="Email" type="email" value={props.email} disabled />
                 </AppFormWrapper>
             </AuthCard>
         </GuestLayout>

@@ -1,18 +1,14 @@
-import React, { PropsWithChildren } from "react";
+import { ComponentProps, PropsWithChildren } from "react";
 
-type Props = Pick<
-    React.ComponentProps<"form">,
-    "id" | "onSubmit" | "className"
-> &
-    PropsWithChildren;
+type Props = {
+    formId: string;
+    className?: string;
+    onSubmit: ComponentProps<"form">["onSubmit"];
+} & PropsWithChildren;
 
 export default function AppFormWrapper(props: Props) {
     return (
-        <form
-            id={props.id}
-            onSubmit={props.onSubmit}
-            className={`grid gap-5 ${props.className}`}
-        >
+        <form id={props.formId} onSubmit={props.onSubmit} className={`grid gap-5 ${props.className}`}>
             {props.children}
         </form>
     );

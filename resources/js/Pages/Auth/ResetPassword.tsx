@@ -37,8 +37,9 @@ export default function ResetPassword(props: Props) {
                 formId={formId}
                 formProcessing={form.processing}
             >
-                <AppFormWrapper id={formId} onSubmit={submit}>
+                <AppFormWrapper formId={formId} onSubmit={submit}>
                     <AppInput
+                        autoFocus
                         label="Email"
                         placeholder="example@email.com"
                         required
@@ -52,27 +53,18 @@ export default function ResetPassword(props: Props) {
                         label="Password"
                         type="password"
                         required
-                        placeholder="••••"
                         value={form.data.password}
                         error={form.errors.password}
-                        onChange={(e) =>
-                            form.setData("password", e.target.value)
-                        }
+                        onChange={(e) => form.setData("password", e.target.value)}
                     />
 
                     <AppInput
                         label="Confirm Password"
                         type="password"
                         required
-                        placeholder="••••"
                         value={form.data.password_confirmation}
                         error={form.errors.password_confirmation}
-                        onChange={(e) =>
-                            form.setData(
-                                "password_confirmation",
-                                e.target.value
-                            )
-                        }
+                        onChange={(e) => form.setData("password_confirmation", e.target.value)}
                     />
                 </AppFormWrapper>
             </AuthCard>
