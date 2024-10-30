@@ -1,7 +1,12 @@
 import { route } from "ziggy-js";
 
-export function getCurrentRoute(): string | null {
+export function isCurrentRoute(routeNameOrUrl: string): boolean {
     const currentRouteName = route().current();
+    const currentRoutePath = currentRouteName && route(currentRouteName, route().params);
 
-    return currentRouteName ? route(currentRouteName, route().params) : null;
+    if (currentRouteName === routeNameOrUrl) {
+        return true;
+    }
+
+    return currentRoutePath === routeNameOrUrl;
 }

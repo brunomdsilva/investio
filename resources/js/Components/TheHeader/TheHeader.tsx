@@ -1,29 +1,29 @@
 import { IconGithub } from "@/Components/AppIcons";
 import AppLogo from "@/Components/AppLogo";
 import AppThemeToggle from "@/Components/AppThemeToggle";
-import { githubLink } from "@/constants";
-import { getCurrentRoute } from "@/helpers";
+import { isCurrentRoute } from "@/helpers";
 import { Button } from "@/shadcn/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/shadcn/components/ui/dropdown-menu";
-import { Link, usePage } from "@inertiajs/react";
-import { ChevronDown } from "lucide-react";
+import { Link } from "@inertiajs/react";
 import { route } from "ziggy-js";
+import TheHeaderDropdown from "./Partials/TheHeaderDropdown";
+
+export type MenuItem = {
+    label: string;
+    route: string;
+    active?: boolean;
+};
+
+const menu: MenuItem[] = [
+    { label: "Dashboard", route: route("dashboard") },
+    { label: "Investments", route: route("investments.index") },
+    { label: "Transactions", route: route("transactions.index") },
+];
 
 export default function TheHeader() {
-    const user = usePage().props.auth.user;
-
-    const menu = [
-        { label: "Dashboard", route: route("dashboard") },
-        { label: "Investments", route: route("investments.index") },
-        { label: "Transactions", route: route("transactions.index") },
-    ];
+    const computedMenu: MenuItem[] = menu.map((each) => ({
+        ...each,
+        active: isCurrentRoute(each.route),
+    }));
 
     return (
         <header className="py-6 flex items-center border-b">
@@ -32,13 +32,9 @@ export default function TheHeader() {
                     <AppLogo />
                 </Link>
 
-                <div className="flex items-center gap-2">
-                    {menu.map((each) => (
-                        <Button
-                            key={each.label}
-                            variant={getCurrentRoute() === each.route ? "default" : "secondary"}
-                            asChild
-                        >
+                <div className="flex items-center gap-2 max-md:hidden">
+                    {computedMenu.map((each) => (
+                        <Button key={each.label} variant={each.active ? "default" : "secondary"} asChild>
                             <Link href={each.route}>{each.label}</Link>
                         </Button>
                     ))}
@@ -47,41 +43,15 @@ export default function TheHeader() {
                 <div className="grow"></div>
 
                 <div className="flex items-center gap-2">
-                    <Button variant="outline" size="icon">
-                        <a href={githubLink} target="_blank" className="p-1 rounded-md hover:bg-muted">
+                    <Button variant="outline" size="icon" asChild>
+                        <a href="https://github.com/brunomdsilva" target="_blank">
                             <IconGithub className="!size-5" />
                         </a>
                     </Button>
 
                     <AppThemeToggle />
 
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="outline">
-                                <span className="text-sm">{user.name}</span>
-                                <ChevronDown />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="start">
-                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem asChild>
-                                <Link href={route("profile.edit")} className="cursor-pointer">
-                                    Profile
-                                </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
-                                <Link
-                                    href={route("logout")}
-                                    method="post"
-                                    as="button"
-                                    className="w-full cursor-pointer"
-                                >
-                                    Logout
-                                </Link>
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <TheHeaderDropdown menu={computedMenu} />
                 </div>
             </div>
         </header>
