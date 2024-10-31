@@ -10,13 +10,6 @@ export default {
         "./resources/js/**/*.tsx",
     ],
     theme: {
-        container: {
-            center: "true",
-            padding: "2rem",
-            screens: {
-                "2xl": "1280px",
-            },
-        },
         extend: {
             fontFamily: {
                 sans: ["Inter", ...fontFamily.sans],

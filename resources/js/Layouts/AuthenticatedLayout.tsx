@@ -1,3 +1,4 @@
+import AppContainer from "@/Components/AppContainer";
 import AppToaster from "@/Components/AppToaster";
 import TheHeader from "@/Components/TheHeader/TheHeader";
 import { Head } from "@inertiajs/react";
@@ -19,7 +20,7 @@ export default function AuthenticatedLayout(props: Props) {
 
                 <main className="flex flex-col grow">
                     <div className="grow py-8 sm:py-12">
-                        <div className="container">{props.children}</div>
+                        <AppContainer>{props.children}</AppContainer>
                     </div>
                 </main>
             </div>

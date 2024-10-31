@@ -17,7 +17,9 @@ Route::middleware('auth')
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::resource('/investments', InvestmentController::class)->names('investments');
-        Route::resource('/transactions', TransactionController::class)->names('transactions');
+        Route::resource('/transactions', TransactionController::class)
+            ->names('transactions')
+            ->only(['index', 'create', 'store']);
     });
 
 require __DIR__.'/auth.php';

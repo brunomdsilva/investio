@@ -65,7 +65,7 @@ class CreateTransactionAction
     {
         $investment = Investment::findOrFail($data->investment_id);
 
-        return Transaction::create([
+        return Transaction::factory()->create([
             'user_id' => $data->user_id,
             'investment_id' => $investment->id,
             'type' => $data->type,

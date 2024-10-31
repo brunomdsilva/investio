@@ -13,7 +13,7 @@ class TransactionController extends Controller
     {
         return Inertia::render('Transactions/Index', [
             'transactions' => TransactionData::collect(
-                Transaction::with('investment')->get()
+                Transaction::with('investment')->paginate(8)
             ),
         ]);
     }

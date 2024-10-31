@@ -11,7 +11,7 @@ export default function AppThemeToggle() {
     }, [isDark]);
 
     return (
-        <Button onClick={() => setIsDark(!isDark)} variant="outline" size="icon">
+        <Button onClick={() => setIsDark(!isDark)} variant="ghost" size="icon">
             <SunIcon className="!size-5" />
         </Button>
     );

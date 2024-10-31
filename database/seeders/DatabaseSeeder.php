@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $investments = Investment::factory(10)->create();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 60; $i++) {
             CreateTransactionAction::run(CreateTransactionData::from([
                 'user_id' => $user->id,
                 'investment_id' => $investments->random()->id,
@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
 
         $userInvestments = $user->ownedInvestments()->get();
 
-        for ($i = 0; $i < 12; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $userInvestment = $userInvestments->random()->first();
 
             CreateTransactionAction::run(CreateTransactionData::from([

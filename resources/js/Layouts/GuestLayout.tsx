@@ -1,3 +1,4 @@
+import AppContainer from "@/Components/AppContainer";
 import AppLogo from "@/Components/AppLogo";
 import AppToaster from "@/Components/AppToaster";
 import { Head, Link } from "@inertiajs/react";
@@ -15,12 +16,12 @@ export default function GuestLayout(props: Props) {
 
             <AppToaster />
 
-            <div className="min-h-screen bg-background flex flex-col gap-8 items-center sm:justify-center py-20 px-4">
+            <div className="min-h-screen bg-background flex flex-col gap-8 items-center sm:justify-center py-20">
                 <Link href={route("dashboard")}>
                     <AppLogo className="h-10" />
                 </Link>
 
-                {props.children}
+                <AppContainer className="flex justify-center">{props.children}</AppContainer>
             </div>
         </>
     );

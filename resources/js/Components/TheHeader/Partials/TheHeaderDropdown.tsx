@@ -26,11 +26,11 @@ export default function TheHeaderDropdown(props: Props) {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 {isMobile ? (
-                    <Button variant="outline" size="icon" className="md:hidden">
+                    <Button variant="ghost" size="icon" className="md:hidden">
                         <MenuIcon className="!size-5" />
                     </Button>
                 ) : (
-                    <Button variant="outline" className="max-md:hidden">
+                    <Button variant="ghost" className="max-md:hidden">
                         <span className="text-sm">{user.name}</span>
                         <ChevronDown />
                     </Button>

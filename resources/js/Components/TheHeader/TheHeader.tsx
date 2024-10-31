@@ -5,6 +5,7 @@ import { isCurrentRoute } from "@/helpers";
 import { Button } from "@/shadcn/components/ui/button";
 import { Link } from "@inertiajs/react";
 import { route } from "ziggy-js";
+import AppContainer from "../AppContainer";
 import TheHeaderDropdown from "./Partials/TheHeaderDropdown";
 
 export type MenuItem = {
@@ -27,23 +28,23 @@ export default function TheHeader() {
 
     return (
         <header className="py-6 flex items-center border-b">
-            <div className="container flex items-center gap-6">
-                <Link href={route("dashboard")}>
-                    <AppLogo />
-                </Link>
+            <AppContainer className="flex items-center justify-between gap-6">
+                <div className="flex items-center gap-6">
+                    <Link href={route("dashboard")}>
+                        <AppLogo />
+                    </Link>
 
-                <div className="flex items-center gap-2 max-md:hidden">
-                    {computedMenu.map((each) => (
-                        <Button key={each.label} variant={each.active ? "default" : "secondary"} asChild>
-                            <Link href={each.route}>{each.label}</Link>
-                        </Button>
-                    ))}
+                    <div className="flex items-center gap-1 max-md:hidden">
+                        {computedMenu.map((each) => (
+                            <Button key={each.label} variant={each.active ? "default" : "ghost"} asChild>
+                                <Link href={each.route}>{each.label}</Link>
+                            </Button>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="grow"></div>
-
-                <div className="flex items-center gap-2">
-                    <Button variant="outline" size="icon" asChild>
+                <div className="flex items-center gap-1">
+                    <Button variant="ghost" size="icon" asChild>
                         <a href="https://github.com/brunomdsilva" target="_blank">
                             <IconGithub className="!size-5" />
                         </a>
@@ -53,7 +54,7 @@ export default function TheHeader() {
 
                     <TheHeaderDropdown menu={computedMenu} />
                 </div>
-            </div>
+            </AppContainer>
         </header>
     );
 }
