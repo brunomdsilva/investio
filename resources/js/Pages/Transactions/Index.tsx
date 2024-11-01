@@ -1,9 +1,12 @@
 import AppPagination, { LaravelPagination } from "@/Components/AppPagination";
-import { formatCurrency, formatDateTime, getInvestmentTypeLabel, getTransactionTypeLabel } from "@/helpers";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Badge } from "@/shadcn/components/ui/badge";
+import { Button } from "@/shadcn/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shadcn/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shadcn/components/ui/table";
+import { getInvestmentTypeLabel, getTransactionTypeLabel } from "@/utils/enums";
+import { formatCurrency, formatDateTime } from "@/utils/helpers";
+import TransactionFormModal from "./Partials/TransactionFormModal";
 
 type Props = {
     transactions: LaravelPagination<App.Data.TransactionData>;
@@ -18,6 +21,9 @@ export default function Index(props: Props) {
                     <CardDescription>
                         Track and monitor your investment activities across all asset classes. You have made a total of{" "}
                         <span className="font-bold">{props.transactions.total}</span> transactions.
+                        <TransactionFormModal>
+                            <Button>Add Transaction</Button>
+                        </TransactionFormModal>
                     </CardDescription>
                 </CardHeader>
 
