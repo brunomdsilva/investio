@@ -8,6 +8,7 @@ import {
     DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu";
 import { useIsMobile } from "@/shadcn/hooks/use-mobile";
+import { cn } from "@/shadcn/lib/utils";
 import { isCurrentRoute } from "@/utils/helpers";
 import { Link, usePage } from "@inertiajs/react";
 import { ChevronDown, MenuIcon } from "lucide-react";
@@ -46,7 +47,7 @@ export default function TheHeaderDropdown(props: Props) {
                             <DropdownMenuItem key={each.label} asChild>
                                 <Link
                                     href={each.route}
-                                    className={`${isCurrentRoute(each.route) && "bg-primary text-primary-foreground"}`}
+                                    className={cn(isCurrentRoute(each.route) && "bg-primary text-primary-foreground")}
                                 >
                                     {each.label}
                                 </Link>

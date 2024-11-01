@@ -1,5 +1,6 @@
 import { Input } from "@/shadcn/components/ui/input";
 import { Label } from "@/shadcn/components/ui/label";
+import { cn } from "@/shadcn/lib/utils";
 import { ComponentProps, ForwardedRef, forwardRef, useId } from "react";
 
 type AppInputTypes =
@@ -41,8 +42,8 @@ function AppInput(baseProps: Props, ref: ForwardedRef<HTMLInputElement>) {
     const id = useId();
 
     return (
-        <div className={`grid w-full gap-2 ${props.className}`}>
-            <Label htmlFor={id} className={`${props.hiddenLabel && "sr-only"}`}>
+        <div className={cn("grid w-full gap-2", props.className)}>
+            <Label htmlFor={id} className={cn(props.hiddenLabel && "sr-only")}>
                 {props.label} {props.required && <span className="text-red-500">*</span>}
             </Label>
 
@@ -55,7 +56,7 @@ function AppInput(baseProps: Props, ref: ForwardedRef<HTMLInputElement>) {
                 value={props.value}
                 onChange={props.onChange}
                 disabled={props.disabled}
-                className={`${props.error && "border-destructive"}`}
+                className={cn(props.error && "border-destructive")}
             />
 
             {props.error && <p className="text-destructive text-xs">{props.error}</p>}

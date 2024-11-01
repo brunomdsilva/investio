@@ -7,6 +7,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/shadcn/components/ui/pagination";
+import { cn } from "@/shadcn/lib/utils";
 
 type LaravelPaginationLink = {
     url: string;
@@ -37,14 +38,17 @@ type Props = {
 
 export default function AppPagination({ pagination, className }: Props) {
     return (
-        <Pagination className={`${className} mt-8`}>
+        <Pagination className={cn("mt-8", className)}>
             <PaginationContent>
                 <PaginationItem>
                     <PaginationPrevious
                         replace
                         preserveScroll
                         href={pagination.prev_page_url ?? "#"}
-                        className={`${!pagination.prev_page_url && "cursor-not-allowed"} [&_span]:sr-only px-3`}
+                        className={cn(
+                            "[&_span]:sr-only px-3",
+                            !pagination.prev_page_url && "pointer-events-none opacity-60"
+                        )}
                     />
                 </PaginationItem>
 
@@ -87,7 +91,10 @@ export default function AppPagination({ pagination, className }: Props) {
                         replace
                         preserveScroll
                         href={pagination.next_page_url ?? "#"}
-                        className={`${!pagination.next_page_url && "cursor-not-allowed"} [&_span]:sr-only px-3`}
+                        className={cn(
+                            "[&_span]:sr-only px-3",
+                            !pagination.next_page_url && "pointer-events-none opacity-60"
+                        )}
                     />
                 </PaginationItem>
             </PaginationContent>

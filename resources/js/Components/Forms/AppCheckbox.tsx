@@ -1,5 +1,6 @@
 import { Checkbox } from "@/shadcn/components/ui/checkbox";
 import { Label } from "@/shadcn/components/ui/label";
+import { cn } from "@/shadcn/lib/utils";
 import { ComponentProps, useId } from "react";
 
 type ReactInputProps = Pick<ComponentProps<typeof Checkbox>, "checked" | "onCheckedChange">;
@@ -20,7 +21,7 @@ export default function AppCheckbox(props: Props) {
                 autoFocus={props.autoFocus}
                 checked={props.checked}
                 onCheckedChange={props.onCheckedChange}
-                className={`rounded border-input ${props.checked && "border-primary"}`}
+                className={cn("rounded border-input", props.checked && "border-primary")}
             />
 
             <div className="grid gap-1.5 leading-none">
