@@ -1,4 +1,3 @@
-import { isCurrentRoute } from "@/helpers";
 import { Button } from "@/shadcn/components/ui/button";
 import {
     DropdownMenu,
@@ -9,6 +8,7 @@ import {
     DropdownMenuTrigger,
 } from "@/shadcn/components/ui/dropdown-menu";
 import { useIsMobile } from "@/shadcn/hooks/use-mobile";
+import { isCurrentRoute } from "@/utils/helpers";
 import { Link, usePage } from "@inertiajs/react";
 import { ChevronDown, MenuIcon } from "lucide-react";
 import { route } from "ziggy-js";

@@ -1,8 +1,8 @@
 import { IconGithub } from "@/Components/AppIcons";
 import AppLogo from "@/Components/AppLogo";
 import AppThemeToggle from "@/Components/AppThemeToggle";
-import { isCurrentRoute } from "@/helpers";
 import { Button } from "@/shadcn/components/ui/button";
+import { isCurrentRoute } from "@/utils/helpers";
 import { Link } from "@inertiajs/react";
 import { route } from "ziggy-js";
 import AppContainer from "../AppContainer";
