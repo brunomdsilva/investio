@@ -1,5 +1,6 @@
 import AppContainer from "@/Components/AppContainer";
 import AppToaster from "@/Components/AppToaster";
+import TheFooter from "@/Components/TheFooter/TheFooter";
 import TheHeader from "@/Components/TheHeader/TheHeader";
 import { Head } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
@@ -18,11 +19,11 @@ export default function AuthenticatedLayout(props: Props) {
             <div className="min-h-screen flex flex-col">
                 <TheHeader />
 
-                <main className="flex flex-col grow">
-                    <div className="grow py-8 sm:py-12">
-                        <AppContainer>{props.children}</AppContainer>
-                    </div>
+                <main className="flex flex-col grow py-8 sm:py-12">
+                    <AppContainer>{props.children}</AppContainer>
                 </main>
+
+                <TheFooter />
             </div>
         </>
     );
