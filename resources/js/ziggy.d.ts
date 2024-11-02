@@ -2,35 +2,34 @@
 declare module 'ziggy-js' {
   interface RouteList {
     "sanctum.csrf-cookie": [],
-    "investments.get": [],
     "dashboard": [],
     "profile.edit": [],
     "profile.update": [],
     "profile.destroy": [],
-    "investments.index": [],
-    "investments.create": [],
-    "investments.store": [],
-    "investments.show": [
+    "assets.index": [],
+    "assets.create": [],
+    "assets.store": [],
+    "assets.show": [
         {
-            "name": "investment",
+            "name": "asset",
             "required": true
         }
     ],
-    "investments.edit": [
+    "assets.edit": [
         {
-            "name": "investment",
+            "name": "asset",
             "required": true
         }
     ],
-    "investments.update": [
+    "assets.update": [
         {
-            "name": "investment",
+            "name": "asset",
             "required": true
         }
     ],
-    "investments.destroy": [
+    "assets.destroy": [
         {
-            "name": "investment",
+            "name": "asset",
             "required": true
         }
     ],

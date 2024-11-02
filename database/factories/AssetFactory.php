@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Enums\InvestmentTypeEnum;
-use App\Models\Investment;
+use App\Enums\AssetTypeEnum;
+use App\Models\Asset;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class InvestmentFactory extends Factory
+class AssetFactory extends Factory
 {
-    protected $model = Investment::class;
+    protected $model = Asset::class;
 
     public function definition(): array
     {
@@ -16,7 +16,7 @@ class InvestmentFactory extends Factory
             'name' => $this->faker->company(),
             'ticker' => strtoupper($this->faker->lexify()),
             'current_value' => $this->faker->randomFloat(2, 100, 999999.99),
-            'type' => $this->faker->randomElement(InvestmentTypeEnum::class),
+            'type' => $this->faker->randomElement(AssetTypeEnum::class),
         ];
     }
 }

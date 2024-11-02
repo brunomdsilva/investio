@@ -19,16 +19,16 @@ import { FormEvent, PropsWithChildren, useId } from "react";
 import { route } from "ziggy-js";
 
 type Props = {
-    // TODO add investments here from the backend
+    // TODO add assets here from the backend
 } & PropsWithChildren;
 
 export default function TransactionFormModal(props: Props) {
-    const fetchInvestmentOptions = useFetch<App.Data.InvestmentData[]>(route("investments.get"));
+    const fetchAssetOptions = useFetch<App.Data.AssetData[]>(route("assets.get"));
 
     const formId = useId();
 
     const form = useForm({
-        investment: "",
+        asset: "",
         type: transactionTypeOptions[0].value as string,
         quantity: "",
     });
@@ -45,13 +45,13 @@ export default function TransactionFormModal(props: Props) {
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Add Transaction</DialogTitle>
-                    <DialogDescription>Add a new transaction to your investment portfolio.</DialogDescription>
+                    <DialogDescription>Add a new transaction to your asset portfolio.</DialogDescription>
                 </DialogHeader>
 
                 <AppFormWrapper onSubmit={submit} formId={formId}>
                     <AppSelect
                         required
-                        // options={fetchInvestmentOptions.data}
+                        // options={fetchAssetOptions.data}
                         label="Transaction type"
                         value={form.data.type}
                         onValueChange={(value) => form.setData("type", value)}

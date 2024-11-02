@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $id
  * @property int $user_id
- * @property int $investment_id
+ * @property int $asset_id
  * @property int $owned_quantity
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class UserInvestment extends Model
+class Holding extends Model
 {
     use HasFactory;
 
@@ -25,8 +25,8 @@ class UserInvestment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function investment(): BelongsTo
+    public function asset(): BelongsTo
     {
-        return $this->belongsTo(Investment::class);
+        return $this->belongsTo(Asset::class);
     }
 }

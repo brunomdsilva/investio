@@ -5,7 +5,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Badge } from "@/shadcn/components/ui/badge";
 import { Button } from "@/shadcn/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shadcn/components/ui/table";
-import { getInvestmentTypeLabel, getTransactionTypeLabel } from "@/utils/enums";
+import { getAssetTypeLabel, getTransactionTypeLabel } from "@/utils/enums";
 import { formatCurrency, formatDateTime } from "@/utils/helpers";
 import TransactionFormModal from "./Partials/TransactionFormModal";
 
@@ -40,12 +40,10 @@ export default function Index(props: Props) {
                             <TableRow key={index}>
                                 <TableCell className="whitespace-nowrap">{formatDateTime(each.created_at)}</TableCell>
                                 <TableCell className="font-medium">
-                                    {each.investment.name}
-                                    <span className="text-muted-foreground text-sm ml-1">
-                                        ({each.investment.ticker})
-                                    </span>
+                                    {each.asset.name}
+                                    <span className="text-muted-foreground text-sm ml-1">({each.asset.ticker})</span>
                                 </TableCell>
-                                <TableCell>{getInvestmentTypeLabel(each.investment.type)}</TableCell>
+                                <TableCell>{getAssetTypeLabel(each.asset.type)}</TableCell>
                                 <TableCell className="text-center">
                                     <Badge variant={each.type === "buy" ? "success" : "destructive"}>
                                         {getTransactionTypeLabel(each.type)}

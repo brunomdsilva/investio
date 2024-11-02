@@ -11,7 +11,7 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class TransactionData extends Data
 {
     public function __construct(
-        public InvestmentData $investment,
+        public AssetData $asset,
         public TransactionTypeEnum $type,
         public int $quantity,
         public float $unit_value,

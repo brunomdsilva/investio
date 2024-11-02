@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class UserInvestmentController extends Controller
+class AssetController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('UserInvestments/Index');
+        return Inertia::render('Assets/Index');
     }
 
     /**

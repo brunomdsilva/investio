@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class Investment extends Model
+class Asset extends Model
 {
     use HasFactory;
 
@@ -26,8 +26,8 @@ class Investment extends Model
         return $this->hasMany(Transaction::class);
     }
 
-    public function userInvestments(): HasMany
+    public function holdings(): HasMany
     {
-        return $this->hasMany(UserInvestment::class);
+        return $this->hasMany(Holding::class);
     }
 }

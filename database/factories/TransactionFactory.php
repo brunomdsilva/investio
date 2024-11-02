@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\TransactionTypeEnum;
-use App\Models\Investment;
+use App\Models\Asset;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -16,7 +16,7 @@ class TransactionFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'investment_id' => Investment::factory(),
+            'asset_id' => Asset::factory(),
             'type' => $this->faker->randomElement(TransactionTypeEnum::class),
             'quantity' => $this->faker->randomNumber(2),
             'unit_value' => $this->faker->randomFloat(2, 100, 9999.99),

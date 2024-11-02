@@ -1,12 +1,12 @@
 declare namespace App.Data {
-export type InvestmentData = {
+export type AssetData = {
 name: string;
 ticker: string;
 current_value: number;
-type: App.Enums.InvestmentTypeEnum;
+type: App.Enums.AssetTypeEnum;
 };
 export type TransactionData = {
-investment: App.Data.InvestmentData;
+asset: App.Data.AssetData;
 type: App.Enums.TransactionTypeEnum;
 quantity: number;
 unit_value: number;
@@ -15,6 +15,6 @@ created_at: string;
 };
 }
 declare namespace App.Enums {
-export type InvestmentTypeEnum = 'crypto' | 'stock' | 'real_estate' | 'bond';
+export type AssetTypeEnum = 'crypto' | 'stock' | 'real_estate' | 'bond';
 export type TransactionTypeEnum = 'buy' | 'sell';
 }

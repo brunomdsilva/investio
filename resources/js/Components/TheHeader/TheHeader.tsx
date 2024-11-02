@@ -16,7 +16,7 @@ export type MenuItem = {
 
 const menu: MenuItem[] = [
     { label: "Dashboard", route: route("dashboard") },
-    { label: "Investments", route: route("investments.index") },
+    { label: "Assets", route: route("assets.index") },
     { label: "Transactions", route: route("transactions.index") },
 ];
 

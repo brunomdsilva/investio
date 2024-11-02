@@ -4,9 +4,9 @@ namespace App\Actions;
 
 use App\Data\CreateTransactionData;
 use App\Enums\TransactionTypeEnum;
-use App\Models\Investment;
+use App\Models\Asset;
+use App\Models\Holding;
 use App\Models\Transaction;
-use App\Models\UserInvestment;
 use Illuminate\Support\Facades\DB;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -28,34 +28,34 @@ class CreateTransactionAction
     {
         $transaction = $this->createTransaction($data);
 
-        $userInvestment = UserInvestment::query()
+        $holding = Holding::query()
             ->firstOrCreate([
                 'user_id' => $data->user_id,
-                'investment_id' => $data->investment_id,
+                'asset_id' => $data->asset_id,
             ]);
 
-        $userInvestment->increment('owned_quantity', $data->quantity);
+        $holding->increment('owned_quantity', $data->quantity);
 
         return $transaction;
     }
 
     private function handleSell(CreateTransactionData $data)
     {
-        $userInvestment = UserInvestment::query()
+        $holding = Holding::query()
             ->where('user_id', $data->user_id)
-            ->where('investment_id', $data->investment_id)
+            ->where('asset_id', $data->asset_id)
             ->first();
 
-        if (! $userInvestment || $userInvestment->owned_quantity < $data->quantity) {
+        if (! $holding || $holding->owned_quantity < $data->quantity) {
             throw new \Exception('User does not have enough quantity to sell');
         }
 
         $transaction = $this->createTransaction($data);
 
-        $userInvestment->decrement('owned_quantity', $data->quantity);
+        $holding->decrement('owned_quantity', $data->quantity);
 
-        if ($userInvestment->owned_quantity === 0) {
-            $userInvestment->delete();
+        if ($holding->owned_quantity === 0) {
+            $holding->delete();
         }
 
         return $transaction;
@@ -63,15 +63,15 @@ class CreateTransactionAction
 
     private function createTransaction(CreateTransactionData $data): Transaction
     {
-        $investment = Investment::findOrFail($data->investment_id);
+        $asset = Asset::findOrFail($data->asset_id);
 
         return Transaction::factory()->create([
             'user_id' => $data->user_id,
-            'investment_id' => $investment->id,
+            'asset_id' => $asset->id,
             'type' => $data->type,
             'quantity' => $data->quantity,
-            'unit_value' => $investment->current_value,
-            'total_value' => $investment->current_value * $data->quantity,
+            'unit_value' => $asset->current_value,
+            'total_value' => $asset->current_value * $data->quantity,
         ]);
     }
 }

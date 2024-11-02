@@ -2,26 +2,26 @@
 
 namespace App\Actions;
 
-use App\Data\InvestmentData;
-use App\Models\Investment;
+use App\Data\AssetData;
+use App\Models\Asset;
 use Illuminate\Routing\Router;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class GetInvestmentSelectOptions
+class GetAssetSelectOptions
 {
     use AsAction;
 
     public static function routes(Router $router): void
     {
-        $router->get('/investments/get', static::class)
+        $router->get('/assets/get', static::class)
             ->middleware('web')
-            ->name('investments.get');
+            ->name('assets.get');
     }
 
     public function handle()
     {
-        return InvestmentData::collect(
-            Investment::all()
+        return AssetData::collect(
+            Asset::all()
         );
     }
 }

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Actions\CreateTransactionAction;
 use App\Data\CreateTransactionData;
 use App\Enums\TransactionTypeEnum;
-use App\Models\Investment;
+use App\Models\Asset;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,27 +20,27 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('admin'),
         ]);
 
-        $investments = Investment::factory(10)->create();
+        $assets = Asset::factory(10)->create();
 
         for ($i = 0; $i < 60; $i++) {
             CreateTransactionAction::run(CreateTransactionData::from([
                 'user_id' => $user->id,
-                'investment_id' => $investments->random()->id,
+                'asset_id' => $assets->random()->id,
                 'type' => TransactionTypeEnum::Buy,
                 'quantity' => random_int(1, 20),
             ]));
         }
 
-        $userInvestments = $user->ownedInvestments()->get();
+        $holdings = $user->ownedAssets()->get();
 
         for ($i = 0; $i < 30; $i++) {
-            $userInvestment = $userInvestments->random()->first();
+            $holding = $holdings->random()->first();
 
             CreateTransactionAction::run(CreateTransactionData::from([
                 'user_id' => $user->id,
-                'investment_id' => $userInvestment->investment_id,
+                'asset_id' => $holding->asset_id,
                 'type' => TransactionTypeEnum::Sell,
-                'quantity' => random_int(1, $userInvestment->owned_quantity),
+                'quantity' => random_int(1, $holding->owned_quantity),
             ]));
         }
     }

@@ -52,8 +52,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Transaction::class);
     }
 
-    public function ownedInvestments(): HasMany
+    public function ownedAssets(): HasMany
     {
-        return $this->hasMany(UserInvestment::class);
+        return $this->hasMany(Holding::class);
     }
 }

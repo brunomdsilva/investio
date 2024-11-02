@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum InvestmentTypeEnum: string
+enum AssetTypeEnum: string
 {
     case Crypto = 'crypto';
     case Stock = 'stock';

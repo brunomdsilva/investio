@@ -10,12 +10,14 @@ return new class extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('user_investments', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('investment_id')->constrained()->cascadeOnDelete();
-            $table->unsignedInteger('owned_quantity')->default(0);
-            $table->unique(['user_id', 'investment_id']);
+            $table->foreignId('asset_id')->constrained()->cascadeOnDelete();
+            $table->enum('type', ["buy","sell"]);
+            $table->unsignedInteger('quantity')->default(0);
+            $table->decimal('unit_value', 15, 2)->default(0);
+            $table->decimal('total_value', 15, 2)->default(0);
             $table->timestamps();
         });
 
@@ -24,6 +26,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('user_investments');
+        Schema::dropIfExists('transactions');
     }
 };

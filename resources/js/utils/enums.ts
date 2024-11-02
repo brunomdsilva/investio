@@ -1,5 +1,5 @@
 type TransactionTypeEnum = App.Enums.TransactionTypeEnum;
-type InvestmentTypeEnum = App.Enums.InvestmentTypeEnum;
+type AssetTypeEnum = App.Enums.AssetTypeEnum;
 
 export function getTransactionTypeLabel(type: TransactionTypeEnum) {
     const types: Record<TransactionTypeEnum, string> = {
@@ -9,8 +9,8 @@ export function getTransactionTypeLabel(type: TransactionTypeEnum) {
     return types[type];
 }
 
-export function getInvestmentTypeLabel(type: InvestmentTypeEnum) {
-    const types: Record<InvestmentTypeEnum, string> = {
+export function getAssetTypeLabel(type: AssetTypeEnum) {
+    const types: Record<AssetTypeEnum, string> = {
         crypto: "Cryptocurrency",
         stock: "Stock",
         real_estate: "Real Estate",
@@ -19,11 +19,11 @@ export function getInvestmentTypeLabel(type: InvestmentTypeEnum) {
     return types[type];
 }
 
-export const investmentTypeOptions: { label: string; value: InvestmentTypeEnum }[] = [
-    { value: "crypto", label: getInvestmentTypeLabel("crypto") },
-    { value: "stock", label: getInvestmentTypeLabel("stock") },
-    { value: "real_estate", label: getInvestmentTypeLabel("real_estate") },
-    { value: "bond", label: getInvestmentTypeLabel("bond") },
+export const assetTypeOptions: { label: string; value: AssetTypeEnum }[] = [
+    { value: "crypto", label: getAssetTypeLabel("crypto") },
+    { value: "stock", label: getAssetTypeLabel("stock") },
+    { value: "real_estate", label: getAssetTypeLabel("real_estate") },
+    { value: "bond", label: getAssetTypeLabel("bond") },
 ];
 
 export const transactionTypeOptions: { label: string; value: TransactionTypeEnum }[] = [

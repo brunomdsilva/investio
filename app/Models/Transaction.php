@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $id
  * @property int $user_id
- * @property int $investment_id
+ * @property int $asset_id
  * @property string $type
  * @property int $quantity
  * @property float $unit_value
@@ -28,8 +28,8 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function investment(): BelongsTo
+    public function asset(): BelongsTo
     {
-        return $this->belongsTo(Investment::class);
+        return $this->belongsTo(Asset::class);
     }
 }

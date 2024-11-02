@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { route } from "ziggy-js";
 
 export default function Dashboard() {
-    const fetchInvestmentOptions = useFetch<App.Data.InvestmentData[]>(route("investments.get"));
+    const fetchAssetOptions = useFetch<App.Data.AssetData[]>(route("assets.get"));
 
     return (
         <AuthenticatedLayout headTitle="Dashboard">
@@ -13,10 +13,10 @@ export default function Dashboard() {
                 <div className="p-10 border">
                     <p>Dashboard content goes here</p>
 
-                    <div>{fetchInvestmentOptions.loading ? "loading" : "done"}</div>
-                    <div>{fetchInvestmentOptions.error}</div>
+                    <div>{fetchAssetOptions.loading ? "loading" : "done"}</div>
+                    <div>{fetchAssetOptions.error}</div>
 
-                    {fetchInvestmentOptions.data?.map((each, index) => (
+                    {fetchAssetOptions.data?.map((each, index) => (
                         <div key={index}>{each.name}</div>
                     ))}
                 </div>
