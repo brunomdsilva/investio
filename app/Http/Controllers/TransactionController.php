@@ -11,10 +11,10 @@ class TransactionController extends Controller
 {
     public function index()
     {
+        $transactions = TransactionData::collect(Transaction::with('asset')->paginate(8));
+
         return Inertia::render('Transactions/Index', [
-            'transactions' => TransactionData::collect(
-                Transaction::with('asset')->paginate(8)
-            ),
+            'transactions' => $transactions,
         ]);
     }
 
