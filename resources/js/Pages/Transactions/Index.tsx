@@ -41,7 +41,9 @@ export default function Index(props: Props) {
                                 <TableCell className="whitespace-nowrap">{formatDateTime(each.created_at)}</TableCell>
                                 <TableCell className="font-medium">
                                     {each.investment.name}
-                                    <span className="text-gray-500 text-sm ml-1">({each.investment.ticker})</span>
+                                    <span className="text-muted-foreground text-sm ml-1">
+                                        ({each.investment.ticker})
+                                    </span>
                                 </TableCell>
                                 <TableCell>{getInvestmentTypeLabel(each.investment.type)}</TableCell>
                                 <TableCell className="text-center">

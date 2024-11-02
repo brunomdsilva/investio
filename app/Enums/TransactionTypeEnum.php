@@ -14,4 +14,13 @@ enum TransactionTypeEnum: string
             self::Sell => 'Sell',
         };
     }
+
+    public static function toSelectArray(): array
+    {
+        return collect(self::cases())
+            ->mapWithKeys(fn ($each, $key) => [
+                $each => self::getLabel($each->value),
+            ])
+            ->toArray();
+    }
 }
