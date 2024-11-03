@@ -14,11 +14,9 @@ function useFetch<T>(url: string) {
                 setData(response.data);
             })
             .catch((error) => {
-                if (axios.isAxiosError(error) && error.response?.data?.message) {
-                    return setError(error.response.data.message);
-                }
-
-                setError("An error occurred");
+                axios.isAxiosError(error) && error.response?.data?.message
+                    ? setError(error.response.data.message)
+                    : setError("An error occurred");
             })
             .finally(() => {
                 setLoading(false);

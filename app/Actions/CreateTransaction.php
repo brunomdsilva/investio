@@ -10,7 +10,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class CreateTransactionAction
+class CreateTransaction
 {
     use AsAction;
 
