@@ -13,6 +13,7 @@
         "lorisleiva/laravel-actions": "^2.8",
         "spatie/enum": "^3.13",
         "spatie/laravel-data": "^4.11",
+        "spatie/laravel-options": "^1.1",
         "spatie/laravel-typescript-transformer": "^2.5",
         "tightenco/ziggy": "^2.0"
     },
