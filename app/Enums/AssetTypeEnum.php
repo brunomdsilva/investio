@@ -9,13 +9,18 @@ enum AssetTypeEnum: string
     case RealEstate = 'real_estate';
     case Bond = 'bond';
 
+    public static function labels(): array
+    {
+        return [
+            self::Crypto->value => 'Crypto',
+            self::Stock->value => 'Stock',
+            self::RealEstate->value => 'Real Estate',
+            self::Bond->value => 'Bond',
+        ];
+    }
+
     public function getLabel(): string
     {
-        return match ($this) {
-            self::Crypto => 'Crypto',
-            self::Stock => 'Stock',
-            self::RealEstate => 'Real Estate',
-            self::Bond => 'Bond',
-        };
+        return $this->labels()[$this->value];
     }
 }

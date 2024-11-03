@@ -7,11 +7,16 @@ enum TransactionTypeEnum: string
     case Buy = 'buy';
     case Sell = 'sell';
 
+    public static function labels(): array
+    {
+        return [
+            self::Buy->value => 'Buy',
+            self::Sell->value => 'Sell',
+        ];
+    }
+
     public function getLabel(): string
     {
-        return match ($this) {
-            self::Buy => 'Buy',
-            self::Sell => 'Sell',
-        };
+        return $this->labels()[$this->value];
     }
 }
