@@ -1,7 +1,7 @@
 import AppFormWrapper from "@/Components/Forms/AppFormWrapper";
 import AppInput from "@/Components/Forms/AppInput";
 import AppSelect from "@/Components/Forms/AppSelect";
-import useFetch from "@/Hooks/useFetch";
+import useOptionFetch from "@/Hooks/useOptionsFetch";
 import { Button } from "@/shadcn/components/ui/button";
 import {
     Dialog,
@@ -12,24 +12,22 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/shadcn/components/ui/dialog";
-import { transactionTypeOptions } from "@/utils/enums";
 import { formatCurrency } from "@/utils/helpers";
 import { useForm } from "@inertiajs/react";
 import { FormEvent, PropsWithChildren, useId } from "react";
 import { route } from "ziggy-js";
 
-type Props = {
-    // TODO add assets here from the backend
-} & PropsWithChildren;
-
-export default function TransactionFormModal(props: Props) {
-    const fetchAssetOptions = useFetch<App.Data.AssetData[]>(route("assets.get"));
-
+export default function TransactionFormModal(props: PropsWithChildren) {
     const formId = useId();
+
+    const transactionTypeOptions = useOptionFetch(route("options.transaction-types"));
+    const defaultTransactionTypeOption: App.Enums.TransactionTypeEnum = "buy";
+
+    const assetOptions = useOptionFetch(route("options.assets"));
 
     const form = useForm({
         asset: "",
-        type: transactionTypeOptions[0].value as string,
+        type: defaultTransactionTypeOption.toString(),
         quantity: "",
     });
 
@@ -48,10 +46,20 @@ export default function TransactionFormModal(props: Props) {
                     <DialogDescription>Add a new transaction to your asset portfolio.</DialogDescription>
                 </DialogHeader>
 
-                <AppFormWrapper onSubmit={submit} formId={formId}>
+                <AppFormWrapper onSubmit={submit} formId={formId} className="grid-cols-2">
                     <AppSelect
                         required
-                        // options={fetchAssetOptions.data}
+                        disabled={assetOptions.loading}
+                        options={assetOptions.data}
+                        label="Asset"
+                        value={form.data.asset}
+                        onValueChange={(value) => form.setData("asset", value)}
+                        className="col-span-full"
+                    />
+                    <AppSelect
+                        required
+                        disabled={transactionTypeOptions.loading}
+                        options={transactionTypeOptions.data}
                         label="Transaction type"
                         value={form.data.type}
                         onValueChange={(value) => form.setData("type", value)}
@@ -65,8 +73,21 @@ export default function TransactionFormModal(props: Props) {
                         label="Quantity"
                         placeholder="999"
                     />
-                    <AppInput type="number" disabled label="Unit price" placeholder={formatCurrency(10)} />
-                    <AppInput type="number" disabled label="Total amount" placeholder={formatCurrency(9990)} />
+                    <AppInput
+                        type="number"
+                        disabled
+                        label="Unit price"
+                        placeholder={formatCurrency(10)}
+                        className="col-span-full"
+                    />
+
+                    <AppInput
+                        type="number"
+                        disabled
+                        label="Total amount"
+                        placeholder={formatCurrency(9990)}
+                        className="col-span-full"
+                    />
                 </AppFormWrapper>
 
                 <DialogFooter>

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\LaravelOptions\Selectable;
+use Spatie\LaravelOptions\SelectOption;
 
 /**
  * @property int $id
@@ -15,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class Asset extends Model
+class Asset extends Model implements Selectable
 {
     use HasFactory;
 
@@ -29,5 +31,13 @@ class Asset extends Model
     public function holdings(): HasMany
     {
         return $this->hasMany(Holding::class);
+    }
+
+    public function toSelectOption(): SelectOption
+    {
+        return new SelectOption(
+            "{$this->name} ({$this->ticker})",
+            $this->id
+        );
     }
 }

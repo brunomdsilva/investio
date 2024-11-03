@@ -13,7 +13,7 @@ import { ComponentProps, PropsWithChildren, useId } from "react";
 
 type SingleOption = {
     label: string;
-    value: string;
+    value: string | number | null;
     groupItems?: never;
 };
 
@@ -32,10 +32,11 @@ type Props = {
     label: string;
     required?: boolean;
     hiddenLabel?: boolean;
-    options?: AppSelectOptions;
+    options?: AppSelectOptions | null;
     value?: ComponentProps<typeof Select>["value"];
     onValueChange?: ComponentProps<typeof Select>["onValueChange"];
     placeholder?: string;
+    disabled?: boolean;
 } & PropsWithChildren;
 
 export default function AppSelect(props: Props) {
@@ -47,29 +48,39 @@ export default function AppSelect(props: Props) {
                 {props.label} {props.required && <span className="text-red-500">*</span>}
             </Label>
 
-            <Select value={props.value} onValueChange={props.onValueChange}>
+            <Select value={props.value} onValueChange={props.onValueChange} disabled={props.disabled}>
                 <SelectTrigger id={id}>
                     <SelectValue placeholder={props.placeholder ?? "Select"} />
                 </SelectTrigger>
 
                 <SelectContent>
-                    {props.options?.map((each, index) =>
-                        each.groupItems ? (
-                            <SelectGroup>
-                                <SelectLabel>{each.label}</SelectLabel>
+                    {props.options?.map((each, index) => {
+                        if (each.groupItems?.length) {
+                            return (
+                                <SelectGroup>
+                                    <SelectLabel>{each.label}</SelectLabel>
 
-                                {each.groupItems.map((groupItem, groupItemIndex) => (
-                                    <SelectItem key={groupItemIndex} value={groupItem.value} className="pl-10">
-                                        {groupItem.label}
-                                    </SelectItem>
-                                ))}
-                            </SelectGroup>
-                        ) : (
-                            <SelectItem key={index} value={each.value}>
-                                {each.label}
-                            </SelectItem>
-                        )
-                    )}
+                                    {each.groupItems.map((groupItem, groupItemIndex) => (
+                                        <SelectItem
+                                            key={groupItemIndex}
+                                            value={groupItem.value?.toString() ?? ""}
+                                            className="pl-10"
+                                        >
+                                            {groupItem.label}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            );
+                        }
+
+                        if (each.value) {
+                            return (
+                                <SelectItem key={index} value={each.value?.toString() ?? ""}>
+                                    {each.label}
+                                </SelectItem>
+                            );
+                        }
+                    })}
                     {props.children}
                 </SelectContent>
             </Select>
