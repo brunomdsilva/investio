@@ -15,7 +15,7 @@ class TransactionResourceData extends Data
     public string $typeLabel;
 
     public function __construct(
-        public AssetData $asset,
+        public AssetResourceData $asset,
         public TransactionTypeEnum $type,
         public int $quantity,
         public float $unit_value,

@@ -1,7 +1,7 @@
 declare namespace App.Data {
-export type AssetData = {
+export type AssetResourceData = {
 typeLabel: string;
-userHoldings?: number;
+typeColor: string;
 id?: number;
 name: string;
 ticker: string;
@@ -16,7 +16,7 @@ quantity?: string;
 };
 export type TransactionResourceData = {
 typeLabel: string;
-asset: App.Data.AssetData;
+asset: App.Data.AssetResourceData;
 type: App.Enums.TransactionTypeEnum;
 quantity: number;
 unit_value: number;

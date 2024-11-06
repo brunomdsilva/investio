@@ -8,10 +8,13 @@ use Spatie\LaravelData\Data;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-class AssetData extends Data
+class AssetResourceData extends Data
 {
     #[Computed]
     public string $typeLabel;
+
+    #[Computed]
+    public string $typeColor;
 
     public function __construct(
         public ?int $id,
@@ -21,5 +24,6 @@ class AssetData extends Data
         public float $current_value,
     ) {
         $this->typeLabel = $type->getLabel();
+        $this->typeColor = $type->getColor();
     }
 }
