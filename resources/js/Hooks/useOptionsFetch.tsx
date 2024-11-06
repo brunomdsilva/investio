@@ -1,13 +1,9 @@
+import { AppSelectOptions } from "@/Components/Forms/AppSelect";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-type SelectableOption = {
-    value: string | number | null;
-    label: string;
-};
-
 function useOptionFetch(endpoint: string) {
-    const [data, setData] = useState<SelectableOption[]>([]);
+    const [data, setData] = useState<AppSelectOptions>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

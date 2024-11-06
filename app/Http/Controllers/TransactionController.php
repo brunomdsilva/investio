@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\TransactionData;
+use App\Actions\StoreTransaction;
+use App\Data\TransactionRequestData;
+use App\Data\TransactionResourceData;
 use App\Models\Transaction;
+use App\Support\Toast;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -11,17 +14,25 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $transactions = TransactionData::collect(Transaction::with('asset')->paginate(8));
+        $transactions = TransactionResourceData::collect(
+            Transaction::with('asset')
+                ->orderBy('created_at', 'desc')
+                ->paginate(8)
+        );
 
         return Inertia::render('Transactions/Index', [
             'transactions' => $transactions,
         ]);
     }
 
-    public function create()
+    public function store(Request $request)
     {
-        //
-    }
+        $data = TransactionRequestData::from($request->merge([
+            'user_id' => $request->user()->id,
+        ]));
 
-    public function store(Request $request) {}
+        StoreTransaction::run($data);
+
+        return back()->with('toast', Toast::success('Transaction created successfully.'));
+    }
 }

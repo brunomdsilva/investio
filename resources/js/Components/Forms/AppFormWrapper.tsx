@@ -9,7 +9,7 @@ type Props = {
 
 export default function AppFormWrapper(props: Props) {
     return (
-        <form id={props.formId} onSubmit={props.onSubmit} className={cn("grid gap-5", props.className)}>
+        <form id={props.formId} onSubmit={props.onSubmit} className={cn("grid gap-4", props.className)}>
             {props.children}
         </form>
     );

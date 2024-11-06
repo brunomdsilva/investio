@@ -18,11 +18,6 @@ class GetTransactionTypeOptions
             ->name('options.transaction-types');
     }
 
-    public function asController()
-    {
-        return $this->handle();
-    }
-
     public function handle()
     {
         return Options::forEnum(TransactionTypeEnum::class)->toArray();

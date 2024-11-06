@@ -9,7 +9,7 @@ import { formatCurrency, formatDateTime } from "@/utils/helpers";
 import TransactionFormModal from "./Partials/TransactionFormModal";
 
 type Props = {
-    transactions: LaravelPagination<App.Data.TransactionData>;
+    transactions: LaravelPagination<App.Data.TransactionResourceData>;
 };
 
 export default function Index(props: Props) {

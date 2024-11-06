@@ -9,7 +9,7 @@ import {
     SelectValue,
 } from "@/shadcn/components/ui/select";
 import { cn } from "@/shadcn/lib/utils";
-import { ComponentProps, PropsWithChildren, useId } from "react";
+import { PropsWithChildren, useId } from "react";
 
 type SingleOption = {
     label: string;
@@ -23,33 +23,32 @@ type GroupOption = {
     value?: never;
 };
 
-type AppSelectOption = SingleOption | GroupOption;
+export type AppSelectOptions = (SingleOption | GroupOption)[];
 
-export type AppSelectOptions = AppSelectOption[];
-
-type Props = {
+type Props<T> = {
     className?: string;
     label: string;
     required?: boolean;
     hiddenLabel?: boolean;
     options?: AppSelectOptions | null;
-    value?: ComponentProps<typeof Select>["value"];
-    onValueChange?: ComponentProps<typeof Select>["onValueChange"];
+    value?: T;
+    onValueChange?: (value: T) => void;
+    error?: string;
     placeholder?: string;
     disabled?: boolean;
 } & PropsWithChildren;
 
-export default function AppSelect(props: Props) {
+export default function AppSelect<T extends string>(props: Props<T>) {
     const id = useId();
 
     return (
-        <div className={cn("grid w-full gap-2", props.className)}>
+        <div className={cn("grid content-start w-full gap-2", props.className)}>
             <Label htmlFor={id} className={cn(props.hiddenLabel && "sr-only")}>
-                {props.label} {props.required && <span className="text-red-500">*</span>}
+                {props.label} {props.required && <span className="text-destructive">*</span>}
             </Label>
 
             <Select value={props.value} onValueChange={props.onValueChange} disabled={props.disabled}>
-                <SelectTrigger id={id}>
+                <SelectTrigger id={id} className={cn(props.error && "border-destructive")}>
                     <SelectValue placeholder={props.placeholder ?? "Select"} />
                 </SelectTrigger>
 
@@ -84,6 +83,8 @@ export default function AppSelect(props: Props) {
                     {props.children}
                 </SelectContent>
             </Select>
+
+            {props.error && <p className="text-destructive text-xs">{props.error}</p>}
         </div>
     );
 }

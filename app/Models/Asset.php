@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AssetTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +14,7 @@ use Spatie\LaravelOptions\SelectOption;
  * @property string $name
  * @property string $ticker
  * @property float $current_value
- * @property string $type
+ * @property AssetTypeEnum $type
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
@@ -22,6 +23,13 @@ class Asset extends Model implements Selectable
     use HasFactory;
 
     protected $guarded = [];
+
+    protected function casts(): array
+    {
+        return [
+            'type' => AssetTypeEnum::class,
+        ];
+    }
 
     public function transactions(): HasMany
     {

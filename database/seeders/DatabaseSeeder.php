@@ -2,9 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Actions\CreateTransaction;
-use App\Data\CreateTransactionData;
-use App\Enums\TransactionTypeEnum;
 use App\Models\Asset;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -22,26 +19,8 @@ class DatabaseSeeder extends Seeder
 
         $assets = Asset::factory(10)->create();
 
-        for ($i = 0; $i < 60; $i++) {
-            CreateTransaction::run(CreateTransactionData::from([
-                'user_id' => $user->id,
-                'asset_id' => $assets->random()->id,
-                'type' => TransactionTypeEnum::Buy,
-                'quantity' => random_int(1, 20),
-            ]));
-        }
-
-        $holdings = $user->ownedAssets()->get();
-
-        for ($i = 0; $i < 30; $i++) {
-            $holding = $holdings->random()->first();
-
-            CreateTransaction::run(CreateTransactionData::from([
-                'user_id' => $user->id,
-                'asset_id' => $holding->asset_id,
-                'type' => TransactionTypeEnum::Sell,
-                'quantity' => random_int(1, $holding->owned_quantity),
-            ]));
-        }
+        $this->call([
+            TransactionSeeder::class,
+        ]);
     }
 }

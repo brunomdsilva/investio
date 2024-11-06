@@ -42,9 +42,9 @@ function AppInput(baseProps: Props, ref: ForwardedRef<HTMLInputElement>) {
     const id = useId();
 
     return (
-        <div className={cn("grid w-full gap-2", props.className)}>
+        <div className={cn("grid content-start w-full gap-2", props.className)}>
             <Label htmlFor={id} className={cn(props.hiddenLabel && "sr-only")}>
-                {props.label} {props.required && <span className="text-red-500">*</span>}
+                {props.label} {props.required && <span className="text-destructive">*</span>}
             </Label>
 
             <Input

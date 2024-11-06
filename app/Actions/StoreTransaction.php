@@ -2,7 +2,7 @@
 
 namespace App\Actions;
 
-use App\Data\CreateTransactionData;
+use App\Data\TransactionRequestData;
 use App\Enums\TransactionTypeEnum;
 use App\Models\Asset;
 use App\Models\Holding;
@@ -10,11 +10,11 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class CreateTransaction
+class StoreTransaction
 {
     use AsAction;
 
-    public function handle(CreateTransactionData $data): Transaction
+    public function handle(TransactionRequestData $data): Transaction
     {
         return DB::transaction(function () use ($data): Transaction {
             return match ($data->type) {
@@ -24,9 +24,9 @@ class CreateTransaction
         });
     }
 
-    private function handleBuy(CreateTransactionData $data): Transaction
+    private function handleBuy(TransactionRequestData $data): Transaction
     {
-        $transaction = $this->createTransaction($data);
+        $transaction = $this->storeTransaction($data);
 
         $holding = Holding::query()
             ->firstOrCreate([
@@ -39,7 +39,7 @@ class CreateTransaction
         return $transaction;
     }
 
-    private function handleSell(CreateTransactionData $data)
+    private function handleSell(TransactionRequestData $data)
     {
         $holding = Holding::query()
             ->where('user_id', $data->user_id)
@@ -50,7 +50,7 @@ class CreateTransaction
             throw new \Exception('User does not have enough quantity to sell');
         }
 
-        $transaction = $this->createTransaction($data);
+        $transaction = $this->storeTransaction($data);
 
         $holding->decrement('owned_quantity', $data->quantity);
 
@@ -61,7 +61,7 @@ class CreateTransaction
         return $transaction;
     }
 
-    private function createTransaction(CreateTransactionData $data): Transaction
+    private function storeTransaction(TransactionRequestData $data): Transaction
     {
         $asset = Asset::findOrFail($data->asset_id);
 

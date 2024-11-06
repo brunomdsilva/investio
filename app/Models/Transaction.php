@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TransactionTypeEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property int $user_id
  * @property int $asset_id
- * @property string $type
+ * @property TransactionTypeEnum $type
  * @property int $quantity
  * @property float $unit_value
  * @property float $total_value
@@ -22,6 +23,13 @@ class Transaction extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected function casts(): array
+    {
+        return [
+            'type' => TransactionTypeEnum::class,
+        ];
+    }
 
     public function user(): BelongsTo
     {
