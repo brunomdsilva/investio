@@ -11,9 +11,11 @@ export default function AppPageHeroSection(props: Props) {
     const shouldRenderHeader = props.title || props.description;
 
     return (
-        <div className={cn("flex flex-col items-start gap-4 sm:flex-row sm:justify-between", props.className)}>
+        <div
+            className={cn("flex flex-col items-start gap-6 sm:gap-12 sm:flex-row sm:justify-between", props.className)}
+        >
             {shouldRenderHeader && (
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 max-w-2xl">
                     {props.title && (
                         <h3 className="text-3xl font-semibold leading-none tracking-tight">{props.title}</h3>
                     )}
@@ -21,7 +23,7 @@ export default function AppPageHeroSection(props: Props) {
                 </div>
             )}
 
-            <div className="flex items-center gap-4">{props.children}</div>
+            {props.children}
         </div>
     );
 }
