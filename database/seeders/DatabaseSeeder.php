@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         collect(AssetTypeEnum::cases())->each(function (AssetTypeEnum $type) {
             Asset::factory(random_int(1, 3))->create([
                 'type' => $type,
+                'current_value' => fake()->randomFloat(2, 99999.99, 999999.99),
             ]);
         });
 

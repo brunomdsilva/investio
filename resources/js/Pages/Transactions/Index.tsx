@@ -19,7 +19,7 @@ export default function Index(props: Props) {
                 description="A record of all buy and sell transactions made by the user, with details and dates for each movement."
             >
                 <TransactionFormModal>
-                    <Button>Add Transaction</Button>
+                    <Button>Make Transaction</Button>
                 </TransactionFormModal>
             </AppPageHeroSection>
 

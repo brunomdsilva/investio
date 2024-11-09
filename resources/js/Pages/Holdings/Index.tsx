@@ -2,8 +2,10 @@ import AppPageHeroSection from "@/Components/AppPageHeroSection";
 import AppPagination, { LaravelPagination } from "@/Components/AppPagination";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Badge } from "@/shadcn/components/ui/badge";
+import { Button } from "@/shadcn/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shadcn/components/ui/table";
 import { formatCurrency } from "@/utils/helpers";
+import TransactionFormModal from "../Transactions/Partials/TransactionFormModal";
 
 type Props = {
     holdings: LaravelPagination<App.Data.HoldingsResourceData>;
@@ -15,7 +17,11 @@ export default function Index(props: Props) {
             <AppPageHeroSection
                 title="Holdings"
                 description="An overview of the assets currently held by the user, with performance data and market value."
-            />
+            >
+                <TransactionFormModal>
+                    <Button>Make Transaction</Button>
+                </TransactionFormModal>
+            </AppPageHeroSection>
 
             <Table>
                 <TableHeader>

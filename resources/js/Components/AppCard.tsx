@@ -2,19 +2,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/sha
 import { PropsWithChildren } from "react";
 
 type Props = {
-    title: string;
+    title?: string;
     description?: string;
+    className?: string;
 } & PropsWithChildren;
 
 export default function AppCard(props: Props) {
-    return (
-        <Card>
-            <CardHeader>
-                <CardTitle>{props.title}</CardTitle>
-                {props.description && <CardDescription>{props.description}</CardDescription>}
-            </CardHeader>
+    const canShowHeader = props.title || props.description;
 
-            <CardContent>{props.children}</CardContent>
+    return (
+        <Card className={props.className}>
+            {canShowHeader && (
+                <CardHeader>
+                    {props.title && <CardTitle>{props.title}</CardTitle>}
+                    {props.description && <CardDescription>{props.description}</CardDescription>}
+                </CardHeader>
+            )}
+
+            <CardContent className={`${!canShowHeader && "pt-6"}`}>{props.children}</CardContent>
         </Card>
     );
 }
