@@ -1,20 +1,37 @@
 import AppPageHeroSection from "@/Components/AppPageHeroSection";
 import AppPagination, { LaravelPagination } from "@/Components/AppPagination";
+import AppInput from "@/Components/Forms/AppInput";
+import useSearch from "@/Hooks/useSearch";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Badge } from "@/shadcn/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shadcn/components/ui/table";
 import { formatCurrency } from "@/utils/helpers";
+import TransactionFormModal from "../Transactions/Partials/TransactionFormModal";
 
 type Props = {
     assets: LaravelPagination<App.Data.AssetResourceData>;
+    search?: string;
 };
 
 export default function Index(props: Props) {
+    const { searchValue, setSearchValue } = useSearch(props.search);
+
     return (
         <AuthenticatedLayout headTitle="Assets">
             <AppPageHeroSection
                 title="Assets"
                 description="Explore available assets for investment, including stocks, cryptocurrencies, and other financial products with detailed information."
+            >
+                <TransactionFormModal />
+            </AppPageHeroSection>
+
+            <AppInput
+                label="Search"
+                placeholder="Search assets..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                autoFocus={Boolean(props.search)}
+                className="max-w-xs"
             />
 
             <Table>

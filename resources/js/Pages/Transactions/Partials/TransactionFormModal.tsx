@@ -21,7 +21,7 @@ export default function TransactionFormModal(props: PropsWithChildren) {
 
     return (
         <Dialog open={modalOpened} onOpenChange={toggleModal}>
-            <DialogTrigger asChild>{props.children}</DialogTrigger>
+            <DialogTrigger asChild>{props.children || <Button>Make Transaction</Button>}</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Add Transaction</DialogTitle>

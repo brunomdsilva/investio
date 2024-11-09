@@ -12,16 +12,28 @@ use Inertia\Inertia;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $transactions = TransactionResourceData::collect(
-            Transaction::with('asset')
-                ->orderBy('created_at', 'desc')
-                ->paginate(8)
-        );
+        $search = $request->input('search');
+
+        $transactions = Transaction::query()
+            ->with('asset')
+            ->when($search, function ($query) use ($search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('quantity', 'like', "%{$search}%")
+                        ->orWhereHas('asset', function ($assetQuery) use ($search) {
+                            $assetQuery->where('name', 'like', "%{$search}%")
+                                ->orWhere('ticker', 'like', "%{$search}%");
+                        });
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(8)
+            ->appends(['search' => $search]);
 
         return Inertia::render('Transactions/Index', [
-            'transactions' => $transactions,
+            'transactions' => TransactionResourceData::collect($transactions),
+            'search' => $search,
         ]);
     }
 

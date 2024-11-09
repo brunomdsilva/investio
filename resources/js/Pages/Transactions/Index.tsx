@@ -1,27 +1,38 @@
 import AppPageHeroSection from "@/Components/AppPageHeroSection";
 import AppPagination, { LaravelPagination } from "@/Components/AppPagination";
+import AppInput from "@/Components/Forms/AppInput";
+import useSearch from "@/Hooks/useSearch";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Badge } from "@/shadcn/components/ui/badge";
-import { Button } from "@/shadcn/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/shadcn/components/ui/table";
 import { formatCurrency, formatDateTime } from "@/utils/helpers";
 import TransactionFormModal from "./Partials/TransactionFormModal";
 
 type Props = {
     transactions: LaravelPagination<App.Data.TransactionResourceData>;
+    search?: string;
 };
 
 export default function Index(props: Props) {
+    const { searchValue, setSearchValue } = useSearch(props.search);
+
     return (
         <AuthenticatedLayout headTitle="Transactions">
             <AppPageHeroSection
                 title="Transactions"
                 description="A record of all buy and sell transactions made by the user, with details and dates for each movement."
             >
-                <TransactionFormModal>
-                    <Button>Make Transaction</Button>
-                </TransactionFormModal>
+                <TransactionFormModal />
             </AppPageHeroSection>
+
+            <AppInput
+                label="Search"
+                placeholder="Search assets..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                autoFocus={Boolean(props.search)}
+                className="max-w-xs"
+            />
 
             <Table>
                 <TableHeader>
