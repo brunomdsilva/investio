@@ -1,4 +1,3 @@
-import { IconGithub } from "@/Components/AppIcons";
 import AppLogo from "@/Components/AppLogo";
 import AppThemeToggle from "@/Components/AppThemeToggle";
 import { Button } from "@/shadcn/components/ui/button";
@@ -45,12 +44,6 @@ export default function TheHeader() {
                 </div>
 
                 <div className="flex items-center gap-1">
-                    <Button variant="ghost" size="icon" asChild>
-                        <a href="https://github.com/brunomdsilva" target="_blank">
-                            <IconGithub className="!size-5" />
-                        </a>
-                    </Button>
-
                     <AppThemeToggle />
 
                     <TheHeaderDropdown menu={computedMenu} />
