@@ -18,6 +18,7 @@ const menu: MenuItem[] = [
     { label: "Dashboard", route: route("dashboard") },
     { label: "Assets", route: route("assets.index") },
     { label: "Transactions", route: route("transactions.index") },
+    { label: "Holdings", route: route("holdings.index") },
 ];
 
 export default function TheHeader() {

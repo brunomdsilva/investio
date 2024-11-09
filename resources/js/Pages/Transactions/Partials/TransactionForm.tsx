@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function TransactionForm(props: Props) {
-    const assets = useFetch<App.Data.AssetData[]>(route("assets.get"));
+    const assets = useFetch<App.Data.AssetResourceData[]>(route("assets.get"));
 
     const assetOptions = useOptionFetch(route("options.assets"));
     const transactionTypeOptions = useOptionFetch(route("options.transaction-types"));

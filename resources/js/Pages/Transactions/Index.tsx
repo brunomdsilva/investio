@@ -27,7 +27,6 @@ export default function Index(props: Props) {
                         <TableRow>
                             <TableHead>Date</TableHead>
                             <TableHead>Asset</TableHead>
-                            <TableHead className="text-center">Asset Type</TableHead>
                             <TableHead className="text-center">Transaction</TableHead>
                             <TableHead className="text-center">Quantity</TableHead>
                             <TableHead className="text-right">Unit Price</TableHead>
@@ -41,11 +40,6 @@ export default function Index(props: Props) {
                                 <TableCell className="font-medium">
                                     {each.asset.name}{" "}
                                     <span className="text-muted-foreground">({each.asset.ticker})</span>
-                                </TableCell>
-                                <TableCell className="text-center">
-                                    <Badge style={{ backgroundColor: each.asset.typeColor }}>
-                                        {each.asset.typeLabel}
-                                    </Badge>
                                 </TableCell>
                                 <TableCell className="text-center">
                                     <Badge variant={each.type === "buy" ? "success" : "destructive"}>

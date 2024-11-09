@@ -37,7 +37,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return back()->with('toast', Toast::success('Profile updated.'));
+        return redirect(route('profile.edit'))->with('toast', Toast::success('Profile updated.'));
     }
 
     /**

@@ -24,10 +24,10 @@ enum AssetTypeEnum: string
     public function getColor(): string
     {
         return match ($this) {
-            self::Crypto => Color::SKY_500,
-            self::Stock => Color::TEAL_600,
-            self::RealEstate => Color::ORANGE_500,
-            self::Bond => Color::PINK_500,
+            self::Crypto => Color::BLUE_500,
+            self::Stock => Color::AMBER_500,
+            self::RealEstate => Color::EMERALD_600,
+            self::Bond => Color::PURPLE_500,
         };
     }
 }

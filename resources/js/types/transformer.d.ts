@@ -8,6 +8,10 @@ ticker: string;
 type: App.Enums.AssetTypeEnum;
 current_value: number;
 };
+export type HoldingsResourceData = {
+asset: App.Data.AssetResourceData;
+owned_quantity: number;
+};
 export type TransactionRequestData = {
 user_id?: string;
 asset_id?: string;

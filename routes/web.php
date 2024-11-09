@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HoldingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
@@ -17,9 +18,8 @@ Route::middleware('auth')
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::resource('/assets', AssetController::class)->names('assets');
-        Route::resource('/transactions', TransactionController::class)
-            ->names('transactions')
-            ->only(['index', 'create', 'store']);
+        Route::resource('/transactions', TransactionController::class)->names('transactions');
+        Route::resource('/holdings', HoldingController::class)->names('holdings');
     });
 
 require __DIR__.'/auth.php';
