@@ -26,7 +26,7 @@ Investio is a portfolio project created to demonstrate programming and developme
 
 Throughout the development of this project, I used several tools and packages to enhance structure, type safety, and functionality:
 
--   **Laravel Blueprint**: Used to generate database structure and boilerplate code. This helped with a quick and efficient setup for models, controllers, and migrations.
+-   **Laravel Blueprint**: Used to generate database structure and boilerplate code. This helped with a quick and efficient setup for models, factories, and migrations.
 -   **Laravel Data and TypeScript Transformer**: These tools provided a bridge between backend data models and TypeScript types in the frontend, ensuring consistent type safety across the application.
 -   **Spatie Options**: This package was used to manage select input options, making it easy to handle predefined values and improve data consistency in forms.
 -   **Axios**: Employed for making asynchronous HTTP requests within React components, which helps avoid prop drilling, keeps the codebase cleaner, and improves performance.
@@ -42,7 +42,7 @@ Here are some planned features and improvements that I’d like to implement as 
 
 ## Contact
 
-For questions, feedback, or collaboration, you can reach me through:
+For questions or feedback, you can reach me through:
 
 -   [GitHub](https://github.com/brunomdsilva)
 -   [Email](mailto:brunosilva010601@gmail.com)
