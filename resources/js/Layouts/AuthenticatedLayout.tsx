@@ -2,6 +2,7 @@ import AppContainer from "@/Components/AppContainer";
 import AppToaster from "@/Components/AppToaster";
 import TheFooter from "@/Components/TheFooter/TheFooter";
 import TheHeader from "@/Components/TheHeader/TheHeader";
+import useTheme from "@/Hooks/useTheme";
 import { Head } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 
@@ -10,6 +11,8 @@ type Props = {
 } & PropsWithChildren;
 
 export default function AuthenticatedLayout(props: Props) {
+    useTheme();
+
     return (
         <>
             <Head title={props.headTitle} />

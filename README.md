@@ -12,7 +12,7 @@ Investio is a portfolio project created to demonstrate programming and developme
 4. Copy `.env.example` to `.env` and update the database credentials.
 5. Run `php artisan key:generate` to generate the application key.
 6. Run `php artisan migrate --seed` to set up and seed the database.
-7. (Optional) Start the Laravel scheduler with `php artisan schedule:work` to keep asset values updated periodically.
+7. (Optional) Start the Laravel scheduler with `php artisan schedule:work` to keep asset values updated periodically, simulating real-world market fluctuations as asset values change over time.
 8. Run `npm run dev` to start the development server.
 
 ## License

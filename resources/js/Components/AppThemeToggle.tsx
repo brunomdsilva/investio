@@ -1,17 +1,12 @@
+import useTheme from "@/Hooks/useTheme";
 import { Button } from "@/shadcn/components/ui/button";
 import { SunIcon } from "lucide-react";
-import { useEffect, useState } from "react";
 
 export default function AppThemeToggle() {
-    const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") === "dark");
-
-    useEffect(() => {
-        document.documentElement.classList.toggle("dark", isDark);
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-    }, [isDark]);
+    const { toggleTheme } = useTheme();
 
     return (
-        <Button onClick={() => setIsDark(!isDark)} variant="ghost" size="icon">
+        <Button onClick={toggleTheme} variant="ghost" size="icon">
             <SunIcon className="!size-5" />
         </Button>
     );

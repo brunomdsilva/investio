@@ -1,6 +1,7 @@
 import AppContainer from "@/Components/AppContainer";
 import AppLogo from "@/Components/AppLogo";
 import AppToaster from "@/Components/AppToaster";
+import useTheme from "@/Hooks/useTheme";
 import { Head, Link } from "@inertiajs/react";
 import { PropsWithChildren } from "react";
 import { route } from "ziggy-js";
@@ -10,6 +11,8 @@ type Props = {
 } & PropsWithChildren;
 
 export default function GuestLayout(props: Props) {
+    useTheme();
+
     return (
         <>
             <Head title={props.headTitle} />
