@@ -1,9 +1,9 @@
-import { Card, CardDescription, CardHeader, CardTitle } from "@/shadcn/components/ui/card";
-import { PropsWithChildren, ReactNode } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/shadcn/components/ui/card";
+import { PropsWithChildren } from "react";
 
 type Props = {
-    title?: ReactNode;
-    description?: ReactNode;
+    title: string;
+    description?: string;
 } & PropsWithChildren;
 
 export default function AppCard(props: Props) {
@@ -11,8 +11,10 @@ export default function AppCard(props: Props) {
         <Card>
             <CardHeader>
                 <CardTitle>{props.title}</CardTitle>
-                <CardDescription>{props.description}</CardDescription>
+                {props.description && <CardDescription>{props.description}</CardDescription>}
             </CardHeader>
+
+            <CardContent>{props.children}</CardContent>
         </Card>
     );
 }

@@ -7,13 +7,13 @@ type Props = {
     className?: string;
 } & PropsWithChildren;
 
-export default function AppPageContentHero(props: Props) {
+export default function AppPageHeroSection(props: Props) {
     const shouldRenderHeader = props.title || props.description;
 
     return (
         <div className={cn("flex flex-col items-start gap-4 sm:flex-row sm:justify-between", props.className)}>
             {shouldRenderHeader && (
-                <div className="flex flex-col gap-1.5">
+                <div className="flex flex-col gap-2">
                     {props.title && (
                         <h3 className="text-3xl font-semibold leading-none tracking-tight">{props.title}</h3>
                     )}

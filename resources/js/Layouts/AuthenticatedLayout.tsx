@@ -20,7 +20,9 @@ export default function AuthenticatedLayout(props: Props) {
                 <TheHeader />
 
                 <main className="flex flex-col grow py-8 sm:py-12">
-                    <AppContainer>{props.children}</AppContainer>
+                    <AppContainer>
+                        <div className="grid gap-8">{props.children}</div>
+                    </AppContainer>
                 </main>
 
                 <TheFooter />

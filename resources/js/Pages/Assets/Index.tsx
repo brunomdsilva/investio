@@ -1,5 +1,4 @@
-import AppPageContent from "@/Components/AppPageContent";
-import AppPageContentHero from "@/Components/AppPageContentHero";
+import AppPageHeroSection from "@/Components/AppPageHeroSection";
 import AppPagination, { LaravelPagination } from "@/Components/AppPagination";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Badge } from "@/shadcn/components/ui/badge";
@@ -13,36 +12,37 @@ type Props = {
 export default function Index(props: Props) {
     return (
         <AuthenticatedLayout headTitle="Assets">
-            <AppPageContent>
-                <AppPageContentHero title="Assets" />
+            <AppPageHeroSection
+                title="Assets"
+                description="Explore available assets for investment, including stocks, cryptocurrencies, and other financial products with detailed information."
+            />
 
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead className="text-center">Ticker</TableHead>
-                            <TableHead>Type</TableHead>
-                            <TableHead className="text-right">Current Value</TableHead>
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead className="text-center">Ticker</TableHead>
+                        <TableHead>Type</TableHead>
+                        <TableHead className="text-right">Current Value</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {props.assets.data.map((each, index) => (
+                        <TableRow key={index}>
+                            <TableCell>{each.name}</TableCell>
+                            <TableCell className="text-center">
+                                <Badge variant="secondary">{each.ticker}</Badge>
+                            </TableCell>
+                            <TableCell>
+                                <Badge style={{ backgroundColor: each.typeColor }}>{each.typeLabel}</Badge>
+                            </TableCell>
+                            <TableCell className="text-right">{formatCurrency(each.current_value)}</TableCell>
                         </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {props.assets.data.map((each, index) => (
-                            <TableRow key={index}>
-                                <TableCell>{each.name}</TableCell>
-                                <TableCell className="text-center">
-                                    <Badge variant="secondary">{each.ticker}</Badge>
-                                </TableCell>
-                                <TableCell>
-                                    <Badge style={{ backgroundColor: each.typeColor }}>{each.typeLabel}</Badge>
-                                </TableCell>
-                                <TableCell className="text-right">{formatCurrency(each.current_value)}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                    ))}
+                </TableBody>
+            </Table>
 
-                <AppPagination pagination={props.assets} />
-            </AppPageContent>
+            <AppPagination pagination={props.assets} />
         </AuthenticatedLayout>
     );
 }
